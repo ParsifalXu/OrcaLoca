@@ -173,8 +173,12 @@
         "id": "17",
         "repo": "astropy/astropy",
         "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
-        "problem_statement": "Find all functions where: (1) all parameters (exclude self, cls, *args, **kwargs) have default values, (2) the function body contains type checking on tuple type",
-        "ref_locations": []
+        "problem_statement": "Find all functions where: (1) the function signature contains no parameters, (2) the function body contains type checking on both bool and str types",
+        "ref_locations": [
+            "astropy/config/tests/test_configs.py:test_configitem_types",
+            "astropy/io/votable/tests/table_test.py:test_validate_output_invalid",
+            "astropy/io/votable/tests/table_test.py:test_validate_output_valid"
+        ]
     },
     {
         "id": "18",
@@ -204,15 +208,22 @@
         "id": "20",
         "repo": "astropy/astropy",
         "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
-        "problem_statement": "Find all functions where: (1) the function has more than 5 parameters that have both default values and type annotations",
-        "ref_locations": []
+        "problem_statement": "Find all functions where: (1) the function has at least 12 parameters with default values, (2) each default value is either None, True, or False, (3) all three values (None, True, False) appear at least once among these default values",
+        "ref_locations": [
+            "astropy/extern/configobj/configobj.py:ConfigObj.__init__"
+        ]
     },
     {
         "id": "21",
         "repo": "astropy/astropy",
         "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
-        "problem_statement": "Find all functions where: (1) the function has type-annotated parameters, (2) the function body contains a try-except block",
-        "ref_locations": []
+        "problem_statement": "Find all functions where: (1) the function has at least 2 parameters with int default values, (2) the function body contains a try-except block",
+        "ref_locations": [
+            "astropy/samp/hub.py:SAMPHubServer.__init__",
+            "astropy/samp/tests/web_profile_test_helpers.py:SAMPWebHubProxy.connect",
+            "astropy/units/core.py:UnitBase._compose",
+            "astropy/wcs/tests/test_wcs.py:test_all_world2pix"
+        ]
     },
     {
         "id": "22",
