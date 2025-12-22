@@ -92,8 +92,19 @@ def get_llm(**kwargs) -> LLM:
         del kwargs["proxies"]
 
     try:
+        # Try with current kwargs first
         llm: LLM = LLM_func(**kwargs)
         _ = llm.complete("Say 'Hi'")
         return llm
     except Exception as e:
+        if "proxies" in str(e):
+            # If proxies error, try removing all potential problematic params
+            filtered_kwargs = {k: v for k, v in kwargs.items() 
+                             if k not in ['proxies', 'http_client', 'default_headers']}
+            try:
+                llm: LLM = LLM_func(**filtered_kwargs)
+                _ = llm.complete("Say 'Hi'")
+                return llm
+            except Exception as e2:
+                raise Exception(f"Failed to initialize LLM after filtering params: {e2}")
         raise Exception(f"Failed to initialize LLM: {e}")
