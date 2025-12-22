@@ -86,6 +86,10 @@ def get_llm(**kwargs) -> LLM:
     # delete orcar_config from kwargs
     if "orcar_config" in kwargs:
         del kwargs["orcar_config"]
+    
+    # Remove proxies parameter if present (not supported in newer versions)
+    if "proxies" in kwargs:
+        del kwargs["proxies"]
 
     try:
         llm: LLM = LLM_func(**kwargs)
