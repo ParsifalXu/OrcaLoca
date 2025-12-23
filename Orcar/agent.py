@@ -93,7 +93,7 @@ class OrcarAgent:
         """Pause the container."""
         if hasattr(self, "ctr_bash") and self.ctr_bash.ctr_subprocess.stdin is not None:
             self.ctr_bash.ctr_subprocess.stdin.close()
-        if self.persistent:
+        if hasattr(self, "persistent") and self.persistent:
             pause_persistent_container(self.ctr_bash)
 
     def set_redirect_log(self, new_value: bool) -> None:
